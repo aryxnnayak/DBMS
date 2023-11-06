@@ -1,0 +1,71 @@
+Problem Statement 3 (Aggregation & Indexing)
+Create the Collection Movies_Data( Movie_ID, Movie_Name, Director, Genre, BoxOfficeCollection) and
+solve the following:
+1. Display a list stating how many Movies are directed by each “Director”.
+2. Display list of Movies with the highest BoxOfficeCollection in each Genre.
+3. Display list of Movies with the highest BoxOfficeCollection in each Genre in ascending order
+of BoxOfficeCollection.
+4. Create an index on field Movie_ID.
+5. Create an index on fields ” Movie_Name” and ” Director”.
+6. Drop an index on field Movie_ID.
+7. Drop an index on fields ” Movie_Name” and ” Director”
+
+1. db.Movies_Data.aggregate([
+  {
+    $group: {
+      _id: "$Director",
+      count: { $sum: 1 }
+    }
+  }
+]);
+
+2. db.Movies_Data.aggregate([
+  {
+    $group: {
+      _id: "$Genre",
+      maxBoxOffice: { $max: "$BoxOfficeCollection" }
+    }
+  },
+  {
+    $lookup: {
+      from: "Movies_Data",
+      localField: "maxBoxOffice",
+      foreignField: "BoxOfficeCollection",
+      as: "topMovies"
+    }
+  }
+]);
+
+3. db.Movies_Data.aggregate([
+  {
+    $group: {
+      _id: "$Genre",
+      maxBoxOffice: { $max: "$BoxOfficeCollection" }
+    }
+  },
+  {
+    $lookup: {
+      from: "Movies_Data",
+      localField: "maxBoxOffice",
+      foreignField: "BoxOfficeCollection",
+      as: "topMovies"
+    }
+  },
+  {
+    $unwind: "$topMovies"
+  },
+  {
+    $sort: {
+      "topMovies.BoxOfficeCollection": 1
+    }
+  }
+]);
+
+4. db.Movies_Data.createIndex({ Movie_ID: 1 });
+
+5. db.Movies_Data.createIndex({ Movie_Name: 1, Director: 1 });
+
+6. db.Movies_Data.dropIndex({ Movie_ID: 1 });
+
+7.db.Movies_Data.dropIndex({ Movie_Name: 1, Director: 1 });
+
