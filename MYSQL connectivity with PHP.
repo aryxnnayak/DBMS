@@ -1,0 +1,44 @@
+Implement MYSQL database connectivity with PHP.
+
+CREATE DATABASE mydb;
+
+CREATE TABLE employees (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    email VARCHAR(100)
+);
+
+<?php
+// Database connection parameters
+$host = "localhost"; // MySQL server hostname
+$username = "your_username"; // MySQL username
+$password = "your_password"; // MySQL password
+$database = "mydb"; // Database name
+
+// Create a connection
+$mysqli = new mysqli($host, $username, $password, $database);
+
+// Check the connection
+if ($mysqli->connect_error) {
+    die("Connection failed: " . $mysqli->connect_error);
+} else {
+    echo "Connected successfully!<br>";
+}
+
+// Perform database operations here
+
+// Close the connection when done
+$mysqli->close();
+?>
+
+$sql = "SELECT * FROM employees";
+$result = $mysqli->query($sql);
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        echo "ID: " . $row["id"] . " - Name: " . $row["first_name"] . " " . $row["last_name"] . "<br>";
+    }
+} else {
+    echo "No records found.";
+}
