@@ -1,0 +1,47 @@
+db.Student.insertMany([
+  { roll_no: 1, name: "John", class: "SE", dept: "Computer Science", aggregate_marks: 90 },
+  { roll_no: 2, name: "Alice", class: "TE", dept: "Electrical Engineering", aggregate_marks: 85 },
+  { roll_no: 3, name: "Bob", class: "TE", dept: "Computer Science", aggregate_marks: 88 },
+  { roll_no: 4, name: "Eve", class: "SE", dept: "Electrical Engineering", aggregate_marks: 92 },
+  { roll_no: 5, name: "Charlie", class: "BE", dept: "Mechanical Engineering", aggregate_marks: 78 }
+]);
+
+
+var mapFunction = function() {
+  if (this.class === "TE") {
+    emit(this.dept, this.aggregate_marks);
+  }
+};
+
+
+var reduceFunction = function(key, values) {
+  return Array.sum(values);
+};
+
+
+db.Student.mapReduce(
+  mapFunction,
+  reduceFunction,
+  { out: "total_marks_TE_department" }
+);
+
+
+for 2
+
+var mapFunction = function() {
+  if (this.class === "SE") {
+    emit(this.dept, this.aggregate_marks);
+  }
+};
+
+
+var reduceFunction = function(key, values) {
+  return Math.max(...values);
+};
+
+
+db.Student.mapReduce(
+  mapFunction,
+  reduceFunction,
+  { out: "highest_marks_SE_department" }
+);
