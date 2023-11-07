@@ -1,0 +1,33 @@
+db.createCollection("Social_Media")
+
+
+db.Social_Media.insertMany([
+  {
+    User_Id: 1,
+    User_Name: "Alice",
+    No_of_Posts: 15,
+    No_of_Friends: 30,
+    Friends_List: ["Bob", "Charlie", "David"],
+    Interests: ["Travel", "Photography", "Music"]
+  },
+  {
+    User_Id: 2,
+    User_Name: "Bob",
+    No_of_Posts: 20,
+    No_of_Friends: 25,
+    Friends_List: ["Alice", "Eve", "Frank"],
+    Interests: ["Cooking", "Movies", "Sports"]
+  },
+  // Add more documents as needed
+]);
+
+
+1.db.Social_Media.find({}, { User_Id: 1, User_Name: 1, _id: 0 })
+
+2.db.Social_Media.find({ No_of_Posts: { $gt: 100 } })
+
+3.db.Social_Media.find({}, { User_Name: 1, Friends_List: 1, _id: 0 })
+
+4.db.Social_Media.find({ $where: "this.Friends_List.length > 5" }, { User_Id: 1, Friends_List: 1, _id: 0 })
+
+5.db.Social_Media.find({}, { User_Id: 1, User_Name: 1, No_of_Posts: 1, _id: 0 }).sort({ No_of_Posts: -1 })
