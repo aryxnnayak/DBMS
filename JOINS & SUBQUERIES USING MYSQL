@@ -1,0 +1,39 @@
+-- Create the Manager table
+CREATE TABLE Manager (
+    Manager_id INT PRIMARY KEY,
+    Manager_name VARCHAR(255)
+);
+
+-- Create the Locations table
+CREATE TABLE Locations (
+    Location_id INT PRIMARY KEY,
+    Street_address VARCHAR(255),
+    Postal_code VARCHAR(20),
+    City VARCHAR(100),
+    State VARCHAR(100),
+    Country_id INT
+);
+
+-- Create the Departments table
+CREATE TABLE Departments (
+    Department_id INT PRIMARY KEY,
+    Department_name VARCHAR(255),
+    Manager_id INT,
+    Location_id INT,
+    FOREIGN KEY (Manager_id) REFERENCES Manager(Manager_id),
+    FOREIGN KEY (Location_id) REFERENCES Locations(Location_id)
+);
+
+-- Create the Employee table
+CREATE TABLE Employee (
+    Employee_id INT PRIMARY KEY,
+    First_name VARCHAR(255),
+    Last_name VARCHAR(255),
+    Hire_date DATE,
+    Salary DECIMAL(10, 2),
+    Job_title VARCHAR(255),
+    Manager_id INT,
+    department_id INT,
+    FOREIGN KEY (Manager_id) REFERENCES Employee(Employee_id),
+    FOREIGN KEY (department_id) REFERENCES Departments(Department_id)
+);
