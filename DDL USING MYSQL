@@ -1,0 +1,47 @@
+-- Create the Customer table
+CREATE TABLE Customer (
+    CustID INT PRIMARY KEY,
+    Name VARCHAR(255),
+    Cust_Address VARCHAR(255),
+    Phone_no VARCHAR(20),
+    Email_ID VARCHAR(255),
+    Age INT
+);
+
+-- Insert data into the Customer table
+INSERT INTO Customer (CustID, Name, Cust_Address, Phone_no, Email_ID, Age)
+VALUES
+    (1, 'John Doe', '123 Main St', '555-1234', 'john@example.com', 30),
+    (2, 'Jane Smith', '456 Elm St', '555-5678', 'jane@example.com', 25),
+    (3, 'Bob Johnson', '789 Oak St', '555-9876', 'bob@example.com', 35);
+
+-- Create the Branch table
+CREATE TABLE Branch (
+    BranchID INT PRIMARY KEY,
+    Branch_Name VARCHAR(255),
+    Address VARCHAR(255)
+);
+
+-- Insert data into the Branch table
+INSERT INTO Branch (BranchID, Branch_Name, Address)
+VALUES
+    (1, 'Main Branch', '123 Main St, City1'),
+    (2, 'Downtown Branch', '456 Elm St, City2'),
+    (3, 'Suburb Branch', '789 Oak St, City3');
+
+-- Create the Account table
+CREATE TABLE Account (
+    Account_no INT PRIMARY KEY,
+    BranchID INT,
+    CustID INT,
+    date_open DATE,
+    Account_type VARCHAR(50),
+    Balance DECIMAL(10, 2)
+);
+
+-- Insert data into the Account table
+INSERT INTO Account (Account_no, BranchID, CustID, date_open, Account_type, Balance)
+VALUES
+    (101, 1, 1, '2023-01-01', 'Savings', 5000.00),
+    (102, 2, 2, '2023-01-15', 'Checking', 7500.00),
+    (103, 3, 3, '2023-02-10', 'Savings', 6000.00);
