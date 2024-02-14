@@ -31,3 +31,54 @@ db.Social_Media.insertMany([
 4.db.Social_Media.find({ $where: "this.Friends_List.length > 5" }, { User_Id: 1, Friends_List: 1, _id: 0 })
 
 5.db.Social_Media.find({}, { User_Id: 1, User_Name: 1, No_of_Posts: 1, _id: 0 }).sort({ No_of_Posts: -1 })
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4CAF50; /* Green background */
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Address</th>
+        <th>Phone No</th>
+        <th>Salary</th>
+    </tr>
+    <tr>
+        <td>John Doe</td>
+        <td>30</td>
+        <td>123 Main St</td>
+        <td>555-1234</td>
+        <td>50000</td>
+    </tr>
+    <tr>
+        <td>Jane Smith</td>
+        <td>25</td>
+        <td>456 Oak Ave</td>
+        <td>555-5678</td>
+        <td>60000</td>
+    </tr>
+    <!-- Add more rows as needed -->
+</table>
+
+</body>
+</html>
