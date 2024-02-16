@@ -82,3 +82,12 @@ db.Social_Media.insertMany([
 
 </body>
 </html>
+
+public static void sendMail(String address, String subject, String body) f
+Messaging. SingleEmailMessage mail = new Messaging.SingleEmailMessage();
+String[] toAddresses = new Stringll (address);
+mail. setToAddresses (toAddresses) ;
+mail. setSubject(subject);
+mail. setPlainTextBody(body):
+Messaging. sendEmail(new Messaging-SingleEmailMessage [] { mail });
+}
